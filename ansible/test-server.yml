@@ -1,0 +1,23 @@
+
+---
+- name: Verify TravelMemory application server
+  hosts: travelmemory
+  become: true
+  tasks:
+    - name: Display server hostname
+      ansible.builtin.command: hostname
+      register: server_hostname
+      changed_when: false
+
+    - name: Show server hostname
+      ansible.builtin.debug:
+        msg: "Connected to {{ server_hostname.stdout }}"
+
+    - name: Check operating system
+      ansible.builtin.command: cat /etc/os-release
+      register: os_info
+      changed_when: false
+
+    - name: Display operating system
+      ansible.builtin.debug:
+        var: os_info.stdout_lines

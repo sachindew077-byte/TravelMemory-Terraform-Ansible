@@ -1,0 +1,49 @@
+---
+- name: Configure TravelMemory MongoDB Atlas
+  hosts: travelmemory
+  become: true
+  vars_files:
+    - atlas-secret.yml
+
+  tasks:
+    - name: Create backend environment file
+      ansible.builtin.copy:
+        dest: /opt/TravelMemory/backend/.env
+        owner: ubuntu
+        group: ubuntu
+        mode: "0600"
+        content: |
+          PORT=3001
+          MONGO_URI={{ mongo_uri }}1~---
+- name: Configure TravelMemory MongoDB Atlas
+  hosts: travelmemory
+  become: true
+  vars_files:
+    - atlas-secret.yml
+
+  tasks:
+    - name: Create backend environment file
+      ansible.builtin.copy:
+        dest: /opt/TravelMemory/backend/.env
+        owner: ubuntu
+        group: ubuntu
+        mode: "0600"
+        content: |
+          PORT=3001
+          MONGO_URI={{ mongo_uri }}1~---
+- name: Configure TravelMemory MongoDB Atlas
+  hosts: travelmemory
+  become: true
+  vars_files:
+    - atlas-secret.yml
+
+  tasks:
+    - name: Create backend environment file
+      ansible.builtin.copy:
+        dest: /opt/TravelMemory/backend/.env
+        owner: ubuntu
+        group: ubuntu
+        mode: "0600"
+        content: |
+          PORT=3001
+          MONGO_URI={{ mongo_uri }}

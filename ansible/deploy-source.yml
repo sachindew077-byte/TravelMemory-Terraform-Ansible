@@ -1,0 +1,19 @@
+
+---
+- name: Download TravelMemory application
+  hosts: travelmemory
+  become: true
+
+  tasks:
+    - name: Install Git
+      ansible.builtin.apt:
+        name: git
+        state: present
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: Clone TravelMemory repository
+      ansible.builtin.git:
+        repo: "https://github.com/UnpredictablePrashant/TravelMemory.git"
+        dest: /opt/TravelMemory
+        version: main

@@ -1,0 +1,23 @@
+# Terraform generated files and state
+**/.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+
+# Secrets and credentials
+*.pem
+*.key
+.env
+**/.env
+atlas-secret.yml
+**/atlas-secret.yml
+.aws/
+
+# Node.js dependencies and builds
+node_modules/
+**/node_modules/
+**/build/
+
+# Editor files
+.vscode/

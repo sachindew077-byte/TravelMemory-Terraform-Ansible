@@ -1,0 +1,38 @@
+
+---
+- name: Configure TravelMemory backend service
+  hosts: travelmemory
+  become: true
+
+  tasks:
+    - name: Create systemd service for TravelMemory backend
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/travelmemory-backend.service
+        owner: root
+        group: root
+        mode: "0644"
+        content: |
+          [Unit]
+          Description=TravelMemory Node.js Backend
+          After=network.target
+
+          [Service]
+          Type=simple
+          User=ubuntu
+          WorkingDirectory=/opt/TravelMemory/backend
+          EnvironmentFile=/opt/TravelMemory/backend/.env
+          ExecStart=/usr/bin/node index.js
+          Restart=on-failure
+          RestartSec=5
+
+          [Install]
+          WantedBy=multi-user.target
+      notify: Restart TravelMemory backend
+
+  handlers:
+    - name: Restart TravelMemory backend
+      ansible.builtin.systemd:
+        name: travelmemory-backend
+        daemon_reload: true
+        enabled: true
+        state: restarted

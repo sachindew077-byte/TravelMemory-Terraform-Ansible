@@ -1,0 +1,37 @@
+
+---
+- name: Install prerequisites on TravelMemory server
+  hosts: travelmemory
+  become: true
+
+  tasks:
+    - name: Update apt package cache
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: Install Git and Node.js
+      ansible.builtin.apt:
+        name:
+          - git
+          - nodejs
+          - npm
+        state: present
+
+    - name: Verify Git installation
+      ansible.builtin.command: git --version
+      register: git_version
+      changed_when: false
+
+    - name: Display Git version
+      ansible.builtin.debug:
+        msg: "{{ git_version.stdout }}"
+
+    - name: Verify Node.js installation
+      ansible.builtin.command: node --version
+      register: node_version
+      changed_when: false
+
+    - name: Display Node.js version
+      ansible.builtin.debug:
+        msg: "{{ node_version.stdout }}"
